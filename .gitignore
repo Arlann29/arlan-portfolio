@@ -1,0 +1,16 @@
+# Dependencies
+server/node_modules/
+
+# Env & secrets — JANGAN commit config.js kalau sudah diisi key asli!
+# Kalau SUPABASE_URL / SUPABASE_ANON_KEY / PAYMENT_CONFIG di config.js
+# sudah diisi nilai produksi, hapus baris ini dan pindahin ke env:
+# config.js
+.env
+.env.*
+
+# Editor & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

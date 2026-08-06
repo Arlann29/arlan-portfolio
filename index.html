@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arlan — Design Grafis, Thumbnail & Web Design</title>
+<meta name="description" content="Arlan bikin desain, thumbnail, dan website yang gampang dipakai dan enak diliat. Cek portofolio dan langsung chat kalau cocok.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="payment.js"></script>
+</head>
+<body>
+
+<div class="marquee-bar">
+  <div class="marquee-track" id="marquee">
+    <span>Slot Juli masih available, gaskeun!</span>
+    <span>Revisi 2× gratis, no drama</span>
+    <span>Auto dibales max 24 jam</span>
+    <span>150+ project udah kelar sejak 2020</span>
+    <span>Slot Juli masih available, gaskeun!</span>
+    <span>Revisi 2× gratis, no drama</span>
+    <span>Auto dibales max 24 jam</span>
+    <span>150+ project udah kelar sejak 2020</span>
+  </div>
+</div>
+
+<header>
+  <nav>
+    <a href="#beranda" class="logo">Arlan<span>.</span></a>
+    <div class="nav-links">
+      <a href="#tentang">Tentang</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#karya">Karya</a>
+      <a href="#proses">Proses</a>
+      <a href="#testimoni">Testimoni</a>
+    </div>
+    <a href="#kontak" class="nav-cta">Gas Ngobrol</a>
+    <button class="burger" id="burger" aria-label="Buka menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#tentang">Tentang</a>
+    <a href="#layanan">Layanan</a>
+    <a href="#karya">Karya</a>
+    <a href="#proses">Proses</a>
+    <a href="#testimoni">Testimoni</a>
+    <a href="#kontak">Kontak</a>
+  </div>
+</header>
+
+<section class="hero" id="beranda">
+  <div class="blob" style="width:340px;height:340px;background:#FFD9A8;top:-80px;right:-60px;"></div>
+  <div class="blob" style="width:220px;height:220px;background:#BFEFE2;bottom:-40px;left:-40px;opacity:.5;"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Sisa 3 slot proyek bulan ini</span>
+      <h1 style="margin-top:20px;">Desain yang bikin orang <em>berhenti scroll.</em></h1>
+      <p class="hero-sub">Halo, Arlan di sini! 👋 Gue suka ngeracik landing page kece pakai Tailwind, bikin aset grafis estetik yang eye-catching, plus thumbnail YouTube yang asik dan gampang bikin klik. Semuanya punya satu tugas: nyantol di kepala orang dan bikin mereka klik — dikerjain santai, tapi tetap terukur dan bergaransi. Bukan cuma cantik doang, tapi kerja.</p>
+      <div class="hero-actions">
+        <a href="#kontak" class="btn-primary">Gas Mulai Proyek →</a>
+        <a href="#karya" class="btn-ghost">Intip Karya</a>
+      </div>
+      <div class="hero-strip">
+        <span class="chip">🎨 Design Grafis</span>
+        <span class="chip">🖼️ Thumbnail</span>
+        <span class="chip">💻 Web Design</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="thumb-card">
+        <div class="glow"></div>
+        <span class="tag">CTR +48% 🔥</span>
+        <div class="cap">Ganti Thumbnail-nya,<br>Ganti Nasib Video-nya.</div>
+        <div class="play"><div class="play-btn"></div></div>
+      </div>
+      <div class="hero-visual-caption">
+        <span>Thumbnail — Channel edukasi, 210K subscriber</span>
+        <span>16:9</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tentang">
+  <div class="wrap about-grid">
+    <div class="about-text" data-reveal="left">
+      <span class="eyebrow"><span class="dot"></span> Sebelum lanjut, kenalan dulu yuk</span>
+      <h2 style="margin-top:20px;">Iya, gue masih SMA. <em>Tapi portofolio gak nanya umur.</em></h2>
+      <p>Gue Arlan, baru aja naik ke kelas 12 — dan portofolio ini sengaja gue bikin buat ngerayain itu, sekaligus mulai lebih serius nawarin skill design ke orang lain. Awalnya desain cuma pelarian dari tugas Matematika: iseng bikin poster buat mading sekolah, eh malah dilirik. Terus dipercaya bikin logo ekskul, thumbnail buat channel YouTube kakak kelas, sampe akhirnya berani nerima klien beneran.</p>
+      <p>Sekarang, tiap malem abis pulang sekolah, laptop gue kebuka bukan buat scroll TikTok doang — tapi buat ngulik brief klien, mainin warna, sampe nyari font yang <strong>pas banget</strong> rasanya. Prosesnya gak selalu mulus, PR numpuk juga tetep jalan. Tapi soal hasil, biar karya yang ngomong — scroll dikit lagi ke bawah, lo bakal liat sendiri.</p>
+      <div class="about-chips">
+        <span class="chip">📚 Baru naik kelas 12</span>
+        <span class="chip">🎨 Belajar desain sejak 2020</span>
+        <span class="chip">📦 150+ project kelar</span>
+      </div>
+    </div>
+    <div class="id-card-wrap" data-reveal="right">
+      <div class="id-card">
+        <div class="id-clip"></div>
+        <div class="id-top">
+          <div class="id-avatar">A</div>
+          <div>
+            <div class="id-name">Arlan</div>
+            <div class="id-role">Siswa Kelas 12 · Designer Lepas</div>
+          </div>
+        </div>
+        <div class="id-divider"></div>
+        <div class="id-row"><span>Skill utama</span><span>Grafis, Thumbnail, Web</span></div>
+        <div class="id-row"><span>Ngedesain sejak</span><span>2020</span></div>
+        <div class="id-row"><span>Jam kerja favorit</span><span>Malem, abis PR kelar</span></div>
+        <span class="id-status"><span class="dot"></span> Available buat proyek</span>
+        <div class="id-barcode"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="layanan">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>Pilih skill, <em>langsung gaspol.</em></h2>
+      <p>Bukan sekadar jasa desain — ini biar kontenmu susah dilewatin orang.</p>
+    </div>
+    <div class="skill-menu" data-reveal-group>
+      <div class="skill-card" data-reveal="scale" style="--stagger:0">
+        <div class="skill-icon">01</div>
+        <h3>Design Grafis</h3>
+        <p>Visual yang bikin brand-mu keinget, bukan cuma keliatan sekilas.</p>
+        <ul class="skill-list">
+          <li>Logo & brand identity</li>
+          <li>Social media kit</li>
+          <li>Poster & banner promo</li>
+          <li>Desain kemasan produk</li>
+        </ul>
+        <div class="skill-price">Mulai dari <b>Rp350K</b> / proyek</div>
+        <button class="skill-order-btn" data-order-service="Design Grafis" data-order-price="Mulai Rp350K">Pesan Layanan Ini →</button>
+      </div>
+      <div class="skill-card" data-reveal="scale" style="--stagger:1">
+        <div class="skill-icon">02</div>
+        <h3>Thumbnail Design</h3>
+        <p>Thumbnail yang bikin jempol orang berhenti scroll, terus klik.</p>
+        <ul class="skill-list">
+          <li>Thumbnail YouTube</li>
+          <li>Cover podcast & reels</li>
+          <li>Set A/B testing thumbnail</li>
+          <li>Channel branding kit</li>
+        </ul>
+        <div class="skill-price">Mulai dari <b>Rp75K</b> / thumbnail</div>
+        <button class="skill-order-btn" data-order-service="Thumbnail Design" data-order-price="Mulai Rp75K">Pesan Layanan Ini →</button>
+      </div>
+      <div class="skill-card" data-reveal="scale" style="--stagger:2">
+        <div class="skill-icon">03</div>
+        <h3>Web Design</h3>
+        <p>Website yang bikin orang betah, bukan langsung tutup tab.</p>
+        <ul class="skill-list">
+          <li>Landing page</li>
+          <li>UI/UX web app</li>
+          <li>Redesign website</li>
+          <li>Prototype interaktif</li>
+        </ul>
+        <div class="skill-price">Mulai dari <b>Rp850K</b> / halaman</div>
+        <button class="skill-order-btn" data-order-service="Web Design" data-order-price="Mulai Rp850K">Pesan Layanan Ini →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="karya">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>Bukti kerja, <em>bukan cuma omongan.</em></h2>
+      <p>Proyek asli dari klien asli — bukan mockup pajangan doang.</p>
+    </div>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" data-filter="all">Semua</button>
+      <button class="filter-tab" data-filter="grafis">Design Grafis</button>
+      <button class="filter-tab" data-filter="thumbnail">Thumbnail</button>
+      <button class="filter-tab" data-filter="web">Web Design</button>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid" data-reveal-group>
+
+      <div class="p-card" data-cat="grafis" data-reveal="scale" style="--stagger:0">
+        <div class="p-thumb g1"> <img src="dashky feeds ig up coming last.png" alt="feeds ig" loading="lazy" onerror="this.style.display='none'"><div class="glow"></div><span class="kicker">Design Grafis</span><div class="cap">konten comingsoon</div></div>
+        <div class="p-body"><span class="client">Klien — dahsky journey</span><span class="arrow">↗</span></div>
+      </div>
+
+      <div class="p-card" data-cat="thumbnail" data-reveal="scale" style="--stagger:1">
+        <div class="p-thumb g3"><img src="fish it 9.png" alt="Thumbnail " loading="lazy" onerror="this.style.display='none'"><div class="glow"></div><span class="kicker">Thumbnail</span><div class="cap">alasan fish it rame</div></div>
+        <div class="p-body"><span class="client">Klien — dahsky journey</span><span class="arrow">↗</span></div>
+      </div>
+
+      <div class="p-card" data-cat="grafis" data-reveal="scale" style="--stagger:2">
+        <div class="p-thumb g2"><img src="colab-Recovered.png" alt="Thumbnail feeds" loading="lazy" onerror="this.style.display='none'"><div class="glow"></div><span class="kicker">Design Grafis</span><div class="cap">poster sekolah</div></div>
+        <div class="p-body"><span class="client">Klien — dahsky journey</span><span class="arrow">↗</span></div>
+      </div>
+
+      <div class="p-card" data-cat="grafis" data-reveal="scale" style="--stagger:3">
+        <div class="p-thumb g2"><img src="tips natan final.png" alt="feeds ig" loading="lazy" onerror="this.style.display='none'"><div class="glow"></div><span class="kicker">Design Grafis</span><div class="cap">tips main natan</div></div>
+        <div class="p-body"><span class="client">Klien — dahsky journey</span><span class="arrow">↗</span></div>
+      </div>
+
+      <div class="p-card" data-cat="thumbnail" data-reveal="scale" style="--stagger:4">
+        <div class="p-thumb g1"><img src="Untitled-1pokeman hutan.png" alt="Thumbnail " loading="lazy" onerror="this.style.display='none'"><div class="glow"></div><span class="kicker">Thumbnail</span><div class="cap">update litel wonderer</div></div>
+        <div class="p-body"><span class="client">Klien — dahsky journey</span><span class="arrow">↗</span></div>
+      </div>
+
+      <div class="p-card" data-cat="grafis" data-reveal="scale" style="--stagger:5">
+        <div class="p-thumb g3"><img src="cover feeds new ky.png" alt="Thumbnail " loading="lazy" onerror="this.style.display='none'"><div class="glow"></div><span class="kicker">Design Grafis</span><div class="cap">postingan beruntun</div></div>
+        <div class="p-body"><span class="client">Klien — dahsky journey</span><span class="arrow">↗</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="stats-band">
+  <div class="wrap">
+    <div class="stats" data-reveal-group>
+      <div class="stat" data-reveal="scale" style="--stagger:0"><div class="num" data-count-to="150" data-suffix="+">0</div><div class="label">Proyek kelar, 0 drama</div></div>
+      <div class="stat" data-reveal="scale" style="--stagger:1"><div class="num" data-count-to="4.9" data-suffix="/5">0</div><div class="label">Rating dari klien asli</div></div>
+      <div class="stat" data-reveal="scale" style="--stagger:2"><div class="num" data-count-to="24" data-suffix=" jam">0</div><div class="label">Respon, gak bikin nunggu</div></div>
+      <div class="stat" data-reveal="scale" style="--stagger:3"><div class="num" data-count-to="2" data-suffix="×">0</div><div class="label">Revisi, tanpa biaya tambahan</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="proses">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <h2>Prosesnya jelas, <em>gak ada drama tambahan.</em></h2>
+      <p>4 langkah, dari brief lo sampe file di tangan lo.</p>
+    </div>
+    <div class="process-list" data-reveal-group>
+      <div class="process-item" data-reveal style="--stagger:0">
+        <span class="idx">01</span>
+        <h3>Brief & riset</h3>
+        <p>Cerita kebutuhan & referensi lo — langsung ditanggepin, gak didiemin.</p>
+      </div>
+      <div class="process-item" data-reveal style="--stagger:1">
+        <span class="idx">02</span>
+        <h3>Konsep awal</h3>
+        <p>2–3 arah desain meluncur, lengkap sama alasan kenapa itu cocok buat lo.</p>
+      </div>
+      <div class="process-item" data-reveal style="--stagger:2">
+        <span class="idx">03</span>
+        <h3>Revisi terarah</h3>
+        <p>2× revisi biar hasilnya bener sesuai bayangan lo, bukan asal "oke deh".</p>
+      </div>
+      <div class="process-item" data-reveal style="--stagger:3">
+        <span class="idx">04</span>
+        <h3>Delivery</h3>
+        <p>File final rapi & lengkap dikirim, gak ada bagian yang ketinggalan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testimoni">
+  <div class="wrap">
+    <div class="testi" data-reveal="scale">
+      <div>
+        <blockquote>Thumbnail dari Arlan naikin CTR channel gue hampir <em>dua kali lipat</em> dalam sebulan — komunikasinya juga gercep, gak pernah bikin nunggu.</blockquote>
+        <cite>— Reza, Pemilik Channel TechTalk ID</cite>
+      </div>
+      <div class="testi-mark">”</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="kontak">
+  <div class="wrap">
+    <div class="cta-card">
+      <div class="blob" style="width:260px;height:260px;background:rgba(255,180,84,.18);top:-60px;left:-40px;"></div>
+      <div class="blob" style="width:200px;height:200px;background:rgba(111,220,198,.18);bottom:-50px;right:-30px;"></div>
+      <span class="eyebrow" style="background:rgba(255,255,255,0.1);color:#fff;box-shadow:none;">Slot Juli terbatas</span>
+      <h2 style="margin-top:18px;">Ada ide? <em style="background:none;-webkit-background-clip:unset;background-clip:unset;color:var(--pop);">Jangan cuma disimpen di Notes.</em></h2>
+      <p class="hero-sub">Auto dibales max 24 jam, lengkap sama estimasi harga & waktu kelarnya.</p>
+      <form class="cta-form" id="ctaForm">
+        <input type="email" placeholder="Email kamu" required>
+        <button type="submit" class="btn-primary">Kirim brief →</button>
+      </form>
+      <p class="cta-note">Atau gas langsung chat via WhatsApp / Instagram di footer bawah ini.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="#beranda" class="logo">Arlan<span>.</span></a>
+        <p>Freelance designer yang gaskeun bikin identitas visual, thumbnail, sampe website — based di Indonesia, layanin klien dari mana aja.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Layanan</h4>
+        <ul>
+          <li><a href="#layanan">Design Grafis</a></li>
+          <li><a href="#layanan">Thumbnail Design</a></li>
+          <li><a href="#layanan">Web Design</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Halaman</h4>
+        <ul>
+          <li><a href="#karya">Karya</a></li>
+          <li><a href="#proses">Proses</a></li>
+          <li><a href="#testimoni">Testimoni</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <ul>
+          <li><a href="mailto:hello@arlan.design">hello@arlan.design</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Arlan. Semua hak cipta dilindungi.</span>
+      <span>Didesain & dikembangin sendiri, dari nol. · <a href="admin.html" style="color:var(--ink-faint);">Admin</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ ORDER MODAL ============ -->
+<div class="order-overlay" id="orderOverlay">
+  <div class="order-modal">
+    <button class="order-close" id="orderClose" aria-label="Tutup">✕</button>
+
+    <!-- STEP 1: isi data -->
+    <div class="order-step active" id="stepForm">
+      <h3>Yuk, isi brief-nya 📝</h3>
+      <p class="sub">Semua orderan otomatis kesimpen, biar gak ada yang keselip.</p>
+      <div class="order-field">
+        <label for="ordName">Nama kamu</label>
+        <input type="text" id="ordName" placeholder="Nama lengkap" required>
+      </div>
+      <div class="order-field">
+        <label for="ordContact">Nomor WhatsApp</label>
+        <input type="tel" id="ordContact" placeholder="08xxxxxxxxxx" required>
+      </div>
+      <div class="order-field">
+        <label for="ordService">Layanan</label>
+        <select id="ordService" required>
+          <option value="">Pilih layanan</option>
+          <option value="Design Grafis">Design Grafis — mulai Rp350K</option>
+          <option value="Thumbnail Design">Thumbnail Design — mulai Rp75K</option>
+          <option value="Web Design">Web Design — mulai Rp850K</option>
+        </select>
+      </div>
+      <div class="order-field">
+        <label for="ordBrief">Brief singkat</label>
+        <textarea id="ordBrief" placeholder="Ceritain kebutuhan, referensi, atau deadline kamu..." required></textarea>
+      </div>
+      <div class="order-error" id="orderError">Waduh, ada yang error. Coba isi ulang atau langsung chat WA aja ya.</div>
+      <div class="order-actions">
+        <button type="button" class="order-submit" id="orderSubmitBtn" style="width:100%">Lanjut ke Pembayaran →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: pembayaran -->
+    <div class="order-step" id="stepPay">
+      <h3>Order kamu udah kesimpen ✅</h3>
+      <p class="sub">Pilih cara bayar, terus gaskeun.</p>
+      <span class="order-id-tag" id="orderIdTag">ID Order: —</span>
+
+      <div class="pay-summary" id="paySummary"></div>
+
+      <div class="pay-tabs">
+        <button type="button" class="pay-tab active" data-paytab="online">💳 Bayar Online</button>
+        <button type="button" class="pay-tab" data-paytab="manual">🏦 Transfer Manual</button>
+      </div>
+
+      <div id="payPanelOnline">
+        <div class="pay-online-box">
+          <p class="sub">Bayar langsung lewat payment gateway. Sekarang masih <b>mode sandbox (uji coba)</b> — gak ada uang beneran yang kepindah, tinggal pilih metode terus simulasikan.</p>
+          <button type="button" class="order-submit" id="payOnlineBtn" style="width:100%">Lanjut ke Pembayaran →</button>
+        </div>
+      </div>
+
+      <div id="payPanelManual" style="display:none">
+        <div class="pay-box">
+          <div class="qris" id="qrisBox">QRIS</div>
+          <div class="acc" id="payAccNumber">—</div>
+          <div class="acc-name" id="payAccName">—</div>
+          <div class="amount" id="payAmount">Nego harga final lewat chat</div>
+        </div>
+        <button class="wa-confirm-btn" id="waConfirmBtn">💬 Saya Sudah Bayar, Konfirmasi ke WA</button>
+      </div>
+
+      <div class="order-error" id="payError"></div>
+
+      <div class="order-actions">
+        <button type="button" class="btn-secondary" id="orderBackBtn" style="width:100%">← Kembali</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: sukses -->
+    <div class="order-step" id="stepDone">
+      <div class="success-check"></div>
+      <h3 style="text-align:center;">Beres! 🎉</h3>
+      <p class="sub" style="text-align:center;" id="doneMsg">Chat WA kamu udah kebuka. Arlan bakal bales max 24 jam. Makasih ya!</p>
+      <div class="order-actions">
+        <button type="button" class="btn-secondary" id="orderCloseDoneBtn" style="width:100%">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="order-fab" id="orderFab">🎨 Pesan Sekarang</button>
+
+<script src="script.js"></script>
+</body>
+</html>

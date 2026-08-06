@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Panel — Arlan Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="payment.js"></script>
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <a href="index.html" class="logo">Arlan<span>.</span></a>
+    <h1>Admin Panel</h1>
+    <p class="login-sub">Masuk buat kelola orderan & pembayaran.</p>
+    <div class="login-field">
+      <label for="loginPass">Password</label>
+      <input type="password" id="loginPass" placeholder="Masukkan password admin" autocomplete="current-password">
+    </div>
+    <div class="login-error" id="loginError">Password salah, coba lagi.</div>
+    <button class="login-btn" id="loginBtn">Masuk →</button>
+    <p class="login-warn">⚠️ Auth client-side (buat demo). Ganti password di <b>config.js</b>. Untuk produksi, pakai Supabase Auth / backend.</p>
+    <p class="login-hint">Password default: <b>arlan123</b> (ubah di config.js)</p>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div class="admin-app" id="adminApp" style="display:none">
+
+  <aside class="sidebar">
+    <a href="index.html" class="logo">Arlan<span>.</span></a>
+    <span class="side-badge" id="sideModeBadge">🔒 Sandbox</span>
+    <nav class="side-nav">
+      <button class="side-link active" data-view="dashboard">📊 Dashboard</button>
+      <button class="side-link" data-view="orders">📦 Pesanan</button>
+      <button class="side-link" data-view="payments">💳 Pembayaran</button>
+    </nav>
+    <div class="side-bottom">
+      <a href="index.html" class="side-link">🌐 Lihat Website</a>
+      <button class="side-link" id="logoutBtn">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="view active" id="viewDashboard">
+      <div class="view-head">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="view-sub">Ringkasan orderan & pemasukan.</p>
+        </div>
+        <button class="btn-ghost" id="refreshBtn">↻ Refresh</button>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-icon">📦</span>
+          <div class="stat-num" id="statTotal">0</div>
+          <div class="stat-label">Total Order</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">⏳</span>
+          <div class="stat-num" id="statPending">0</div>
+          <div class="stat-label">Menunggu Pembayaran</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">✅</span>
+          <div class="stat-num" id="statPaid">0</div>
+          <div class="stat-label">Dibayar & Selesai</div>
+        </div>
+        <div class="stat-card stat-card-revenue">
+          <span class="stat-icon">💰</span>
+          <div class="stat-num" id="statRevenue">Rp0</div>
+          <div class="stat-label">Total Pemasukan</div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Order Terbaru</h3>
+            <button class="panel-link" data-go="orders">Lihat semua →</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>ID</th><th>Klien</th><th>Layanan</th><th>Status</th></tr></thead>
+              <tbody id="recentOrdersBody"><tr><td colspan="4" class="table-empty">Belum ada order.</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h3>Status Order</h3></div>
+          <div id="statusBreakdown" class="status-breakdown">
+            <p class="table-empty">Belum ada data.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PESANAN ===== -->
+    <section class="view" id="viewOrders">
+      <div class="view-head">
+        <div>
+          <h1>Pesanan</h1>
+          <p class="view-sub">Semua orderan dari website, kelola status di sini.</p>
+        </div>
+        <div class="view-actions">
+          <button class="btn-ghost" id="exportOrdersBtn">⬇ Export CSV</button>
+          <button class="btn-ghost" id="refreshBtn2">↻ Refresh</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input type="search" id="orderSearch" class="toolbar-search" placeholder="Cari nama / ID / WhatsApp...">
+        <select id="statusFilter" class="toolbar-select">
+          <option value="all">Semua status</option>
+          <option value="menunggu_pembayaran">Menunggu Pembayaran</option>
+          <option value="menunggu_verifikasi">Menunggu Verifikasi</option>
+          <option value="dibayar">Dibayar</option>
+          <option value="selesai">Selesai</option>
+          <option value="batal">Dibatalkan</option>
+        </select>
+      </div>
+
+      <div class="panel">
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Tanggal</th><th>ID</th><th>Klien</th><th>WhatsApp</th>
+                <th>Layanan</th><th>Jumlah</th><th>Status</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody"><tr><td colspan="8" class="table-empty">Belum ada order.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PEMBAYARAN ===== -->
+    <section class="view" id="viewPayments">
+      <div class="view-head">
+        <div>
+          <h1>Pembayaran</h1>
+          <p class="view-sub">Riwayat transaksi payment gateway.</p>
+        </div>
+        <button class="btn-ghost" id="refreshBtn3">↻ Refresh</button>
+      </div>
+      <div class="panel">
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Waktu</th><th>ID Payment</th><th>Order</th><th>Metode</th>
+                <th>Jumlah</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="paymentsBody"><tr><td colspan="6" class="table-empty">Belum ada pembayaran.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ DETAIL ORDER MODAL ============ -->
+<div class="modal-overlay" id="orderModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <h2>Detail Order</h2>
+    <span class="detail-id" id="detailId">—</span>
+
+    <div class="detail-grid">
+      <div class="detail-item"><span>Nama</span><b id="dName">—</b></div>
+      <div class="detail-item"><span>WhatsApp</span><b id="dContact">—</b></div>
+      <div class="detail-item"><span>Layanan</span><b id="dService">—</b></div>
+      <div class="detail-item"><span>Jumlah</span><b id="dAmount">—</b></div>
+      <div class="detail-item"><span>Metode Bayar</span><b id="dPayMethod">—</b></div>
+      <div class="detail-item"><span>Dibuat</span><b id="dCreated">—</b></div>
+    </div>
+
+    <div class="detail-brief">
+      <span>Brief klien</span>
+      <p id="dBrief">—</p>
+    </div>
+
+    <div class="detail-status">
+      <span>Ubah status</span>
+      <div class="detail-status-row">
+        <select id="statusSelect">
+          <option value="menunggu_pembayaran">Menunggu Pembayaran</option>
+          <option value="menunggu_verifikasi">Menunggu Verifikasi</option>
+          <option value="dibayar">Dibayar</option>
+          <option value="selesai">Selesai</option>
+          <option value="batal">Dibatalkan</option>
+        </select>
+        <button class="btn-primary" id="saveStatusBtn">Simpan</button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <a class="btn-ghost" id="waClientBtn" href="#" target="_blank" rel="noopener">💬 Chat Klien</a>
+      <button class="btn-danger" id="deleteOrderBtn">Hapus Order</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

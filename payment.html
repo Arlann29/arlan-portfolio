@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pembayaran — Arlan Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="payment.css">
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="payment.js"></script>
+</head>
+<body class="pay-body">
+
+<header class="pay-header">
+  <div class="pay-header-inner">
+    <a href="index.html" class="logo">Arlan<span>.</span></a>
+    <span class="pay-badge" id="gatewayBadge">🔒 Sandbox Mode</span>
+    <a href="index.html" class="pay-back">← Kembali ke website</a>
+  </div>
+</header>
+
+<main class="pay-main wrap">
+
+  <!-- STATE: loading -->
+  <div class="pay-state" id="stateLoading">
+    <div class="pay-spinner"></div>
+    <p>Menyiapkan pembayaran...</p>
+  </div>
+
+  <!-- STATE: order tidak ditemukan -->
+  <div class="pay-state" id="stateNotFound" style="display:none">
+    <div class="pay-state-icon">😕</div>
+    <h2>Order gak ketemu</h2>
+    <p class="sub">Link pembayaran ini udah gak valid. Coba buat order baru dari website.</p>
+    <a href="index.html" class="btn-primary">Kembali ke Website</a>
+  </div>
+
+  <!-- STATE: sudah dibayar -->
+  <div class="pay-state" id="stateAlreadyPaid" style="display:none">
+    <div class="success-check"></div>
+    <h2>Order ini udah dibayar ✅</h2>
+    <p class="sub">Status order kamu udah tercatat. Makasih ya!</p>
+    <a href="index.html" class="btn-primary">Kembali ke Website</a>
+  </div>
+
+  <!-- STATE: pilih metode -->
+  <div class="pay-card" id="statePick" style="display:none">
+    <div class="pay-order-summary">
+      <div>
+        <span class="order-id-tag" id="sumOrderId">ID Order: —</span>
+        <h2 id="sumService">—</h2>
+        <p class="sub" id="sumName">—</p>
+      </div>
+      <div class="pay-amount" id="sumAmount">Rp—</div>
+    </div>
+
+    <h3 class="pay-section-title">Pilih metode pembayaran</h3>
+    <div class="pay-methods" id="methodGrid"></div>
+
+    <div class="pay-sandbox-note">
+      ⚠️ Ini <b>mode sandbox / uji coba</b> — gak ada uang beneran yang dipindah.
+      Klik "Simulasi Berhasil" atau "Simulasi Gagal" buat ngetes kedua skenario.
+    </div>
+  </div>
+
+  <!-- STATE: detail metode -->
+  <div class="pay-card" id="stateDetail" style="display:none">
+    <button class="pay-back-btn" id="backToMethods">← Ganti metode</button>
+    <div class="pay-detail-head">
+      <span class="pay-detail-icon" id="detIcon">📱</span>
+      <div>
+        <h2 id="detTitle">—</h2>
+        <p class="sub" id="detDesc">—</p>
+      </div>
+    </div>
+
+    <!-- QRIS -->
+    <div class="pay-detail-box" id="detQris" style="display:none">
+      <canvas id="qrisCanvas" class="pay-qr" width="180" height="180"></canvas>
+      <p class="sub">Scan QR ini pakai e-wallet / m-banking kamu (simulasi).</p>
+    </div>
+
+    <!-- Virtual Account -->
+    <div class="pay-detail-box" id="detVa" style="display:none">
+      <p class="sub">Transfer ke nomor virtual account di bawah ini:</p>
+      <div class="pay-copy-row">
+        <span class="pay-bignum" id="vaNumber">—</span>
+        <button class="pay-copy-btn" data-copy-target="vaNumber">Salin</button>
+      </div>
+      <p class="sub">Bank <b id="vaBank">—</b> · a.n. Arlan (simulasi)</p>
+    </div>
+
+    <!-- E-wallet -->
+    <div class="pay-detail-box" id="detWallet" style="display:none">
+      <p class="sub">Bayar ke nomor <b id="walletName">—</b> ini:</p>
+      <div class="pay-copy-row">
+        <span class="pay-bignum" id="walletNumber">—</span>
+        <button class="pay-copy-btn" data-copy-target="walletNumber">Salin</button>
+      </div>
+      <p class="sub">Pastikan nama penerima <b>Arlan</b> (simulasi)</p>
+    </div>
+
+    <!-- Kartu -->
+    <div class="pay-detail-box" id="detCard" style="display:none">
+      <p class="sub">Data kartu uji coba udah keisi. Tinggal klik bayar (simulasi).</p>
+      <div class="pay-card-form">
+        <label>Nomor kartu
+          <input type="text" id="cardNumber" value="4811 1111 1111 1114" inputmode="numeric">
+        </label>
+        <div class="pay-card-row">
+          <label>Masa berlaku
+            <input type="text" id="cardExpiry" value="12/28" placeholder="MM/YY">
+          </label>
+          <label>CVV
+            <input type="text" id="cardCvv" value="123" inputmode="numeric">
+          </label>
+        </div>
+      </div>
+      <p class="sub">Kartu uji coba sandbox: <b>4811 1111 1111 1114</b> — masa berlaku apa aja, CVV apa aja.</p>
+    </div>
+
+    <div class="pay-countdown" id="countdownBox">
+      ⏳ Pembayaran kadaluarsa dalam <b id="countdown">—</b>
+    </div>
+
+    <div class="pay-sim-actions">
+      <button class="btn-primary pay-sim-success" id="simSuccessBtn">✅ Simulasi: Pembayaran Berhasil</button>
+      <button class="btn-secondary pay-sim-fail" id="simFailBtn">❌ Simulasi: Pembayaran Gagal</button>
+    </div>
+  </div>
+
+  <!-- STATE: memproses -->
+  <div class="pay-state" id="stateProcessing" style="display:none">
+    <div class="pay-spinner"></div>
+    <h2>Memproses pembayaran...</h2>
+    <p class="sub">Mohon tunggu sebentar, jangan tutup halaman ini.</p>
+  </div>
+
+</main>
+
+<p class="pay-footer-note">Pembayaran dijalankan oleh <b id="gatewayFooterName">Sandbox Payment</b> (mode uji coba).</p>
+
+<script src="payment-page.js"></script>
+</body>
+</html>
