@@ -426,7 +426,31 @@ if (ctaWaBtn) {
 }
 
 /* ============================================================
-   11) START
+   11) BOTTOM NAV (khusus HP) — scroll spy + tombol pesan
+============================================================ */
+const mbLinks = document.querySelectorAll('.mb-link');
+const mbOrderBtn = document.getElementById('mbOrderBtn');
+const MB_SECTIONS = ['beranda', 'layanan', 'karya', 'kontak'];
+
+function updateMbNav() {
+  if (!mbLinks.length) return;
+  const probe = window.scrollY + window.innerHeight * 0.35;
+  let current = 'beranda';
+  MB_SECTIONS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= probe) current = id;
+  });
+  mbLinks.forEach(l => l.classList.toggle('active', l.dataset.mb === current));
+}
+window.addEventListener('scroll', updateMbNav, { passive: true });
+updateMbNav();
+
+if (mbOrderBtn) {
+  mbOrderBtn.addEventListener('click', () => openOrderModal());
+}
+
+/* ============================================================
+   12) START
 ============================================================ */
 handlePaymentRedirect();
 updateSlotCounters();

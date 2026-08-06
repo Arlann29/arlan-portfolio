@@ -667,3 +667,96 @@
     .lightbox-body img{max-height:62vh;}
     .lightbox{padding:14px;}
   }
+
+  /* ============================================================
+     TAMPILAN KHUSUS HP (max-width: 860px)
+     Bottom nav, touch-friendly, layout kompak.
+     ============================================================ */
+  .mobile-bottom-nav{
+    display:none;
+    position:fixed;bottom:0;left:0;right:0;z-index:150;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);
+    padding:6px 12px calc(6px + env(safe-area-inset-bottom));
+    box-shadow:0 -8px 26px rgba(23,35,61,.1);
+  }
+  .mb-link{
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    padding:8px 2px;border-radius:12px;cursor:pointer;
+    font-family:'Plus Jakarta Sans';font-size:10px;font-weight:700;color:var(--ink-faint);
+    transition:color .2s,transform .2s;min-height:44px;justify-content:center;
+    background:none;border:none;text-decoration:none;
+  }
+  .mb-link .mb-ico{font-size:19px;line-height:1;transition:transform .2s;}
+  .mb-link.active{color:var(--accent-hover);}
+  .mb-link.active .mb-ico{transform:translateY(-1px) scale(1.08);}
+  .mb-action{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    background:linear-gradient(150deg,var(--accent),var(--mint));color:#fff;
+    border:none;border-radius:20px;cursor:pointer;margin-top:-26px;
+    padding:12px 6px 9px;font-family:'Plus Jakarta Sans';font-size:10px;font-weight:800;
+    box-shadow:0 10px 24px rgba(76,141,255,.4);transition:transform .2s,box-shadow .2s;
+  }
+  .mb-action:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(76,141,255,.5);}
+  .mb-action:active{transform:scale(.96);}
+  .mb-action .mb-ico{font-size:20px;line-height:1;}
+
+  @media(max-width:860px){
+    .mobile-bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;}
+
+    /* FAB pindah ke bottom nav — sembunyiin FAB lama biar gak dobel */
+    .order-fab{display:none;}
+
+    /* kasih ruang bawah biar konten gak ketutupan bottom nav */
+    body{padding-bottom:calc(70px + env(safe-area-inset-bottom));}
+
+    /* header & hero lebih kompak */
+    nav{padding:12px 18px;}
+    .logo{font-size:21px;}
+    .hero{padding:44px 0 36px;}
+    section{padding:56px 0;}
+    .stats-band{padding:44px 0;}
+    .cta-section{padding-top:0;}
+    .wrap{padding:0 20px;}
+    .section-head{margin-bottom:32px;}
+
+    /* scroll spy: anchor jangan ketutupan sticky header */
+    section[id], .stats-band, .cta-section{scroll-margin-top:64px;}
+
+    /* touch target lebih lega */
+    .skill-order-btn{padding:15px;font-size:14px;}
+    .order-submit,.btn-secondary,.wa-confirm-btn{padding:16px;}
+    .filter-tab{padding:12px 20px;}
+    .filter-tabs{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;-ms-overflow-style:none;}
+    .filter-tabs::-webkit-scrollbar{display:none;}
+    .filter-tab{flex-shrink:0;}
+    .hero-actions .btn-primary,.hero-actions .btn-ghost{padding:16px 24px;font-size:15px;}
+
+    /* modal order lebih lega di layar kecil */
+    .order-modal{padding:24px 18px;}
+    .order-field input,.order-field select,.order-field textarea{padding:14px 15px;font-size:15px;}
+
+    /* CTA card */
+    .cta-card{padding:44px 20px;}
+    .cta-actions .btn-primary,.cta-wa-btn{padding:16px 22px;font-size:14px;}
+
+    /* testimoni */
+    .testi{padding:30px 20px;}
+
+    /* stats angka sedikit lebih kecil biar muat 2 kolom */
+    .stat .num{font-size:30px;}
+
+    /* marquee font sedikit lebih besar biar kebaca */
+    .marquee-bar{font-size:11px;padding:9px 0;}
+  }
+
+  @media(max-width:560px){
+    /* galeri portrait — gambar 4:5 sesuai konten feeds/poster */
+    .p-thumb{aspect-ratio:4/5;}
+    .p-thumb .cap{font-size:16px;}
+    .hero-sub{font-size:15px;}
+    .skill-card{padding:26px 20px;}
+    .process-item{padding:22px 18px;}
+  }

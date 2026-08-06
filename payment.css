@@ -164,3 +164,18 @@
   transition:all .35s cubic-bezier(.22,.9,.32,1);box-shadow:var(--shadow-dark);
 }
 .pay-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ---------- mobile polish ---------- */
+@media(max-width:560px){
+  .pay-header-inner{padding:12px 18px;}
+  .pay-main{padding-top:24px;padding-bottom:24px;}
+  .pay-card{padding:22px 16px;}
+  .pay-order-summary h2{font-size:18px;}
+  .pay-amount{font-size:20px;}
+  .pay-sim-actions button{padding:15px;font-size:13.5px;}
+  .pay-copy-row{flex-direction:column;}
+  .pay-bignum{width:100%;text-align:center;font-size:19px;}
+  .pay-copy-btn{width:100%;}
+  .pay-card-form input{padding:14px;font-size:15px;}
+  body.pay-body{padding-bottom:env(safe-area-inset-bottom);}
+}
