@@ -283,7 +283,46 @@ waConfirmBtn.addEventListener('click', async () => {
 });
 
 /* ============================================================
-   7) BALIKAN DARI PAYMENT GATEWAY (?payment=success|failed)
+   7) LIGHTBOX KARYA — klik kartu, gambar besar muncul
+      sesuai nama/kategori kartunya
+============================================================ */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxKicker = document.getElementById('lightboxKicker');
+const lightboxTitle = document.getElementById('lightboxTitle');
+const lightboxClient = document.getElementById('lightboxClient');
+
+document.getElementById('portfolioGrid').addEventListener('click', (e) => {
+  const card = e.target.closest('.p-card');
+  if (!card) return;
+  const img = card.querySelector('.p-thumb img');
+  const kicker = card.querySelector('.kicker');
+  const cap = card.querySelector('.cap');
+  const client = card.querySelector('.client');
+  if (!img || !img.getAttribute('src')) return; // kartu tanpa gambar — jangan dibuka
+
+  lightboxImg.src = img.getAttribute('src');
+  lightboxImg.alt = img.getAttribute('alt') || '';
+  lightboxKicker.textContent = kicker ? kicker.textContent : '';
+  lightboxTitle.textContent = cap ? cap.textContent : '';
+  lightboxClient.textContent = client ? client.textContent : '';
+
+  lightbox.classList.add('open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
+
+/* ============================================================
+   8) BALIKAN DARI PAYMENT GATEWAY (?payment=success|failed)
 ============================================================ */
 async function handlePaymentRedirect() {
   const params = new URLSearchParams(window.location.search);

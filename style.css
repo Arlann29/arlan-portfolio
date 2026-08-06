@@ -569,3 +569,41 @@
     }
     .mobile-menu a{padding:12px 0;font-size:15px;font-weight:700;border-bottom:1px solid var(--line);color:var(--ink-dim);}
   }
+
+  /* ---------- lightbox karya ---------- */
+  .lightbox{
+    position:fixed;inset:0;z-index:300;background:rgba(20,36,70,.82);
+    backdrop-filter:blur(6px);
+    display:none;align-items:center;justify-content:center;padding:24px;
+    opacity:0;transition:opacity .25s;
+  }
+  .lightbox.open{display:flex;opacity:1;}
+  .lightbox-body{
+    max-width:min(900px,94vw);width:100%;
+    background:var(--surface);border-radius:var(--radius-lg);overflow:hidden;
+    box-shadow:var(--shadow-dark);
+    transform:translateY(16px) scale(.97);transition:transform .3s cubic-bezier(.22,.9,.32,1);
+  }
+  .lightbox.open .lightbox-body{transform:translateY(0) scale(1);}
+  .lightbox-body img{
+    width:100%;max-height:74vh;object-fit:contain;
+    background:#fff;display:block;
+  }
+  .lightbox-cap{padding:18px 24px 22px;display:flex;flex-direction:column;gap:6px;}
+  .lightbox-kicker{
+    align-self:flex-start;font-size:10px;font-weight:800;color:var(--ink);
+    background:var(--bg-soft);padding:5px 12px;border-radius:999px;letter-spacing:.03em;
+  }
+  .lightbox-cap h3{font-size:22px;}
+  .lightbox-client{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin:0;}
+  .lightbox-close{
+    position:fixed;top:20px;right:22px;width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);cursor:pointer;
+    color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;
+    transition:all .2s;z-index:301;
+  }
+  .lightbox-close:hover{background:var(--pop-2);transform:rotate(90deg);}
+  @media(max-width:560px){
+    .lightbox-body img{max-height:62vh;}
+    .lightbox{padding:14px;}
+  }
