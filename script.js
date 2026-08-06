@@ -202,6 +202,7 @@ orderSubmitBtn.addEventListener('click', async () => {
   try {
     const created = await DB.createOrder(orderPayload);
     currentOrder = created;
+    updateSlotCounters(); // order baru masuk — refresh kuota slot
     showPaymentStep();
   } catch (err) {
     console.error(err);
@@ -350,19 +351,82 @@ async function handlePaymentRedirect() {
 }
 
 /* ============================================================
-   8) CTA email form (bagian bawah) tetap jalan seperti biasa,
-      plus arahin ke modal order buat detail lengkap
+   9) KUOTA SLOT BULAN INI — dinamis dari jumlah order
+      (hero eyebrow, marquee, progress bar di CTA)
 ============================================================ */
-const ctaForm = document.querySelector('.cta-form');
-if (ctaForm) {
-  ctaForm.addEventListener('submit', (e) => {
+async function computeRemainingSlots() {
+  const quota = (typeof SLOT_QUOTA !== 'undefined') ? SLOT_QUOTA : 5;
+  if (typeof DB === 'undefined') return quota;
+  let orders = [];
+  try { orders = await DB.getOrders(); } catch (e) { /* fallback: anggap kosong */ }
+  const now = new Date();
+  const thisMonth = now.getFullYear() + '-' + now.getMonth();
+  const taken = orders.filter(o => {
+    const d = new Date(o.created_at);
+    if (isNaN(d)) return false;
+    return (d.getFullYear() + '-' + d.getMonth()) === thisMonth && o.status !== 'batal';
+  }).length;
+  return { quota, taken, remaining: Math.max(0, quota - taken) };
+}
+
+const MONTH_NAMES = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+async function updateSlotCounters() {
+  const { quota, taken, remaining } = await computeRemainingSlots();
+  const monthName = MONTH_NAMES[new Date().getMonth()];
+
+  // marquee
+  document.querySelectorAll('.slot-text').forEach(el => {
+    el.textContent = remaining > 0
+      ? `Sisa ${remaining} slot proyek bulan ini, gaskeun!`
+      : `Slot ${monthName} full — chat aja, gue usahain buka slot!`;
+  });
+
+  // hero eyebrow
+  const heroSlot = document.getElementById('heroSlotText');
+  if (heroSlot) {
+    heroSlot.textContent = remaining > 0
+      ? `Sisa ${remaining} slot proyek bulan ini`
+      : `Slot ${monthName} udah full — chat aja!`;
+  }
+
+  // progress bar CTA
+  const progressText = document.getElementById('slotProgressText');
+  const progressPct = document.getElementById('slotProgressPct');
+  const progressFill = document.getElementById('slotProgressFill');
+  if (progressText && progressFill) {
+    const pct = Math.round((taken / quota) * 100);
+    progressText.textContent = taken > 0
+      ? `${taken} dari ${quota} slot terisi bulan ini`
+      : `${quota} slot open bulan ini — jadi yang pertama!`;
+    progressPct.textContent = pct + '%';
+    progressFill.style.width = pct + '%';
+    progressFill.style.background = pct >= 100
+      ? 'linear-gradient(90deg,#FF8A73,#FFB454)'
+      : 'linear-gradient(90deg,#4C8DFF,#6FDCC6)';
+  }
+}
+
+/* ============================================================
+   10) CTA BAWAH — tombol order & WA (form email lama dihapus,
+       sekarang langsung nyambung ke modal order)
+============================================================ */
+const ctaOrderBtn = document.getElementById('ctaOrderBtn');
+if (ctaOrderBtn) {
+  ctaOrderBtn.addEventListener('click', () => openOrderModal());
+}
+const ctaWaBtn = document.getElementById('ctaWaBtn');
+if (ctaWaBtn) {
+  ctaWaBtn.addEventListener('click', (e) => {
+    const waNumber = (typeof WHATSAPP_NUMBER !== 'undefined') ? WHATSAPP_NUMBER : '';
+    if (!waNumber) { e.preventDefault(); openOrderModal(); return; }
     e.preventDefault();
-    ctaForm.querySelector('button').textContent = 'Terkirim ✓';
-    setTimeout(() => openOrderModal(), 500);
+    window.open(waLink(waNumber, 'Halo Arlan! Gue mau tanya-tanya soal jasa desain dulu, boleh?'), '_blank');
   });
 }
 
 /* ============================================================
-   9) START
+   11) START
 ============================================================ */
 handlePaymentRedirect();
+updateSlotCounters();

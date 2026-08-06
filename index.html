@@ -17,12 +17,16 @@
 
 <div class="marquee-bar">
   <div class="marquee-track" id="marquee">
-    <span>Slot Juli masih available, gaskeun!</span>
+    <span class="slot-text">Slot bulan ini masih available, gaskeun!</span>
+    <span>Order langsung kesimpen otomatis 📝</span>
     <span>Revisi 2× gratis, no drama</span>
+    <span>Bayar online: QRIS, VA, e-wallet 💳</span>
     <span>Auto dibales max 24 jam</span>
     <span>150+ project udah kelar sejak 2020</span>
-    <span>Slot Juli masih available, gaskeun!</span>
+    <span class="slot-text">Slot bulan ini masih available, gaskeun!</span>
+    <span>Order langsung kesimpen otomatis 📝</span>
     <span>Revisi 2× gratis, no drama</span>
+    <span>Bayar online: QRIS, VA, e-wallet 💳</span>
     <span>Auto dibales max 24 jam</span>
     <span>150+ project udah kelar sejak 2020</span>
   </div>
@@ -38,7 +42,7 @@
       <a href="#proses">Proses</a>
       <a href="#testimoni">Testimoni</a>
     </div>
-    <a href="#kontak" class="nav-cta">Gas Ngobrol</a>
+    <a href="#kontak" class="nav-cta" id="navCtaBtn">Pesan Sekarang</a>
     <button class="burger" id="burger" aria-label="Buka menu"><span></span><span></span><span></span></button>
   </nav>
   <div class="mobile-menu" id="mobileMenu">
@@ -56,7 +60,7 @@
   <div class="blob" style="width:220px;height:220px;background:#BFEFE2;bottom:-40px;left:-40px;opacity:.5;"></div>
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow"><span class="dot"></span> Sisa 3 slot proyek bulan ini</span>
+      <span class="eyebrow"><span class="dot"></span> <span id="heroSlotText">Sisa 5 slot proyek bulan ini</span></span>
       <h1 style="margin-top:20px;">Desain yang bikin orang <em>berhenti scroll.</em></h1>
       <p class="hero-sub">Halo, Arlan di sini! 👋 Gue suka ngeracik landing page kece pakai Tailwind, bikin aset grafis estetik yang eye-catching, plus thumbnail YouTube yang asik dan gampang bikin klik. Semuanya punya satu tugas: nyantol di kepala orang dan bikin mereka klik — dikerjain santai, tapi tetap terukur dan bergaransi. Bukan cuma cantik doang, tapi kerja.</p>
       <div class="hero-actions">
@@ -67,6 +71,7 @@
         <span class="chip">🎨 Design Grafis</span>
         <span class="chip">🖼️ Thumbnail</span>
         <span class="chip">💻 Web Design</span>
+        <span class="chip">💳 Bayar Online</span>
       </div>
     </div>
     <div class="hero-visual">
@@ -300,13 +305,31 @@
     <div class="cta-card">
       <div class="blob" style="width:260px;height:260px;background:rgba(255,180,84,.18);top:-60px;left:-40px;"></div>
       <div class="blob" style="width:200px;height:200px;background:rgba(111,220,198,.18);bottom:-50px;right:-30px;"></div>
-      <span class="eyebrow" style="background:rgba(255,255,255,0.1);color:#fff;box-shadow:none;">Slot Juli terbatas</span>
+      <span class="eyebrow" style="background:rgba(255,255,255,0.1);color:#fff;box-shadow:none;">Kuota bulan ini</span>
+      <div class="slot-progress" id="slotProgress">
+        <div class="slot-progress-head">
+          <span id="slotProgressText">0 dari 5 slot terisi</span>
+          <b id="slotProgressPct">0%</b>
+        </div>
+        <div class="slot-progress-bar"><i id="slotProgressFill"></i></div>
+      </div>
       <h2 style="margin-top:18px;">Ada ide? <em style="background:none;-webkit-background-clip:unset;background-clip:unset;color:var(--pop);">Jangan cuma disimpen di Notes.</em></h2>
-      <p class="hero-sub">Auto dibales max 24 jam, lengkap sama estimasi harga & waktu kelarnya.</p>
-      <form class="cta-form" id="ctaForm">
-        <input type="email" placeholder="Email kamu" required>
-        <button type="submit" class="btn-primary">Kirim brief →</button>
-      </form>
+      <p class="hero-sub">Isi brief singkat, pilih cara bayar, beres. Auto dibales max 24 jam, lengkap sama estimasi harga & waktu kelarnya.</p>
+
+      <div class="cta-actions">
+        <button type="button" class="btn-primary" id="ctaOrderBtn">Bikin Order Sekarang →</button>
+        <a class="btn-ghost cta-wa-btn" id="ctaWaBtn" href="#" target="_blank" rel="noopener">💬 Chat WhatsApp</a>
+      </div>
+
+      <div class="cta-steps">
+        <div class="cta-step"><b>1</b><span>Isi brief</span><small>1 menit, langsung kesimpen</small></div>
+        <div class="cta-step"><b>2</b><span>Pilih cara bayar</span><small>Online atau transfer manual</small></div>
+        <div class="cta-step"><b>3</b><span>Kelar + revisi 2×</span><small>File dikirim, no drama</small></div>
+      </div>
+
+      <div class="pay-chips">
+        <span>💳 QRIS</span><span>🏦 Virtual Account</span><span>💚 GoPay</span><span>💜 OVO</span><span>💙 DANA</span><span>💳 Kartu</span>
+      </div>
       <p class="cta-note">Atau gas langsung chat via WhatsApp / Instagram di footer bawah ini.</p>
     </div>
   </div>

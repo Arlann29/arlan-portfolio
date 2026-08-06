@@ -28,6 +28,11 @@ const PRICING = {
   'Web Design':       850000, // mulai Rp850K
 };
 
+/* ---------- KUOTA SLOT PROYEK PER BULAN ---------- */
+// Dipakai buat hitung "Sisa X slot bulan ini" (hero, marquee, CTA).
+// Terisi otomatis dari jumlah order bulan berjalan (status != batal).
+const SLOT_QUOTA = 5;
+
 /* ============================================================
    PAYMENT GATEWAY
    ============================================================
